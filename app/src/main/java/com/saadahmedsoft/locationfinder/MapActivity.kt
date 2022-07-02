@@ -9,8 +9,6 @@ import android.location.Location
 import android.location.LocationListener
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import androidx.core.content.ContextCompat
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -25,7 +23,9 @@ import com.saadahmedsoft.locationfinder.utils.delay
 import java.io.IOException
 import java.util.*
 
-class MapActivity : AppCompatActivity(), OnMapReadyCallback, LocationListener, GoogleMap.OnCameraIdleListener, GoogleMap.OnCameraMoveListener, GoogleMap.OnCameraMoveStartedListener {
+class MapActivity : AppCompatActivity(), OnMapReadyCallback, LocationListener,
+    GoogleMap.OnCameraIdleListener, GoogleMap.OnCameraMoveListener,
+    GoogleMap.OnCameraMoveStartedListener {
 
     private lateinit var binding: ActivityMapBinding
 
@@ -55,13 +55,22 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, LocationListener, G
     override fun onMapReady(p0: GoogleMap) {
         mapView.onResume()
         mMap = p0
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-            || ContextCompat.checkSelfPermission( this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            requestPermissions(arrayOf(
-                Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.ACCESS_COARSE_LOCATION), 20)
-        }
-        else {
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+            || ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            requestPermissions(
+                arrayOf(
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                ), 20
+            )
+        } else {
             mMap!!.isMyLocationEnabled = true
             mMap!!.uiSettings.isZoomControlsEnabled = true
         }
@@ -70,13 +79,13 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, LocationListener, G
     override fun onLocationChanged(p0: Location) {
         Log.d(TAG, "onLocationChanged: ")
         val geoCoder = Geocoder(this, Locale.getDefault())
-        var address: List<Address>? = null
+        val address: List<Address>?
 
         try {
             address = geoCoder.getFromLocation(p0.latitude, p0.longitude, 1)
             setAddress(address[0])
+        } catch (e: Exception) {
         }
-        catch (e: Exception) {}
     }
 
     private fun setAddress(address: Address?) {
@@ -95,10 +104,14 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, LocationListener, G
         val address: List<Address>?
 
         try {
-            address = geoCoder.getFromLocation(mMap!!.cameraPosition.target.latitude, mMap!!.cameraPosition.target.longitude, 1)
+            address = geoCoder.getFromLocation(
+                mMap!!.cameraPosition.target.latitude,
+                mMap!!.cameraPosition.target.longitude,
+                1
+            )
             setAddress(address[0])
+        } catch (e: Exception) {
         }
-        catch (e: Exception) {}
     }
 
     override fun onCameraMove() {
@@ -141,13 +154,11 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, LocationListener, G
                             defaultZoom
                         )
                     }
-                }
-                else {
+                } else {
                     //AppConstants.showSnackBar(requireContext(), binding.root, "Location not found", AppConstants.SNACK_SHORT)
                 }
             }
-        }
-        catch (e: Exception) {
+        } catch (e: Exception) {
             Log.d(TAG, "getCurrentLocation: ${e.message}")
         }
     }
@@ -158,7 +169,8 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, LocationListener, G
 
         val geoCoder = Geocoder(this, Locale.getDefault())
         try {
-            val addresses: List<Address> = geoCoder.getFromLocation(latLng.latitude, latLng.longitude, 10)
+            val addresses: List<Address> =
+                geoCoder.getFromLocation(latLng.latitude, latLng.longitude, 10)
             val address = addresses[1]
             binding.addressLine.text = address.getAddressLine(0)
             binding.country.text = address.countryName
