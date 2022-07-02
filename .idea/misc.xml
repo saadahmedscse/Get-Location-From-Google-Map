@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Documents/Android Studio Projects/LocationFinder/app/src/main/res/drawable/bg_grey_5.xml" value="0.149" />
         <entry key="..\:/Documents/Android Studio Projects/LocationFinder/app/src/main/res/layout/activity_map.xml" value="0.25" />
       </map>
     </option>
