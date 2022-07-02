@@ -1,0 +1,18 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.LocationFinder" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/static_main</item>
+        <item name="colorPrimaryVariant">@color/colorWhite</item>
+        <item name="colorOnPrimary">@color/colorDarkGrey</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/static_main</item>
+        <item name="colorSecondaryVariant">@color/colorWhite</item>
+        <item name="colorOnSecondary">@color/colorDarkGrey</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowDisablePreview">true</item>
+        <!-- Customize your theme here. -->
+    </style>
+</resources>
