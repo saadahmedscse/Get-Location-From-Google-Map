@@ -16,7 +16,7 @@
 
 /**
  * Get Location from Google Map.
- * Made by Saad Ahmed on 03-Jul-2022.
+ * Made by Saad Ahmed on 02-Jul-2022.
  */
 
 package com.saadahmedsoft.locationfinder
