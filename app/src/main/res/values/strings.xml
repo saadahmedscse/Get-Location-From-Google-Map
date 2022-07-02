@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Location Finder</string>
+    //Location
+    <string name="google_api_key" translatable="false">Your Api Key</string>
 </resources>
